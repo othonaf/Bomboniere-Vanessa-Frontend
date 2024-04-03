@@ -1,50 +1,65 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useState, useRef } from 'react';
 import Quagga from 'quagga';
 
 function Content() {
+    const [code, setCode] = useState('');
     const scannerRef = useRef(null);
-    const [isScanning, setIsScanning] = useState(false);
 
-    useEffect(() => {
-        if (isScanning) {
-            Quagga.init({
-                inputStream: {
-                    type: "LiveStream",
-                    constraints: {
-                        width: 640,
-                        height: 480,
-                        facingMode: "environment"
-                    },
-                    target: scannerRef.current
-                },
-                decoder: {
-                    readers: ["ean_reader"]
-                }
-            }, function (err) {
-                if (err) {
-                    console.log(err);
-                    return;
-                }
-                Quagga.start();
+    const iniciaLeitor = () => {
+        Quagga.init({
+            inputStream: {
+                name: 'Live',
+                type: 'LiveStream',
+                target: scannerRef.current
+            },
+            decoder: {
+                readers: ['ean_reader']
+            }
+        }, function (err) {
+            if (err) {
+                console.log(err);
+                return;
+            }
+            console.log('Initialization finished. Ready to start');
+            Quagga.start();
+            Quagga.onDetected(onDetected);
+        });
+    };
+
+    const stopReader = () => {
+        Quagga.stop();
+    };
+
+    const onDetected = (data) => {
+        setCode(data.codeResult.code);
+        stopReader();
+        console.log(data);
+    };
+
+    const copyCode = () => {
+        navigator.clipboard.writeText(code)
+            .then(() => {
+                alert('Código de barras copiado com sucesso!');
+            })
+            .catch(() => {
+                alert('Erro ao copiar Código de barras!');
             });
-
-            Quagga.onDetected(function (result) {
-                console.log("Barcode detected and processed : [" + result.codeResult.code + "]",result);
-            }); // 
-
-            return () => {
-                Quagga.offDetected();
-                Quagga.stop();
-            };
-        }
-    }, [isScanning]);
+    };
 
     return (
         <div>
-            <button onClick={() => setIsScanning(!isScanning)}>
-                {isScanning ? 'Parar Scanner' : 'Iniciar Scanner'}
+            <button onClick={iniciaLeitor}>
+                Iniciar Leitura
             </button>
-            <div id="interactive" className="viewport" ref={scannerRef} />
+            {code && (
+                <p>
+                    Código Lido: {code}
+                    <button onClick={copyCode}>
+                        Copiar código
+                    </button>
+                </p>
+            )}
+            <div id="interactive" ref={scannerRef} />
         </div>
     );
 }
