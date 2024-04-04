@@ -20,13 +20,13 @@ function BuscarProduto() {
         setShowScanner(false);
         console.log(data);
     };
-    
+
     const codprod = code;
     const selecionaProduto = async () => {
         try {
             console.log(code)
             const response = await backend.get('consultaProduto', { params: { codprod } })
-            setData(response.data)
+            setData(response.data[0])
             console.log(response)
         } catch (error) {
             setError(error)
@@ -58,11 +58,11 @@ function BuscarProduto() {
                 {error && <p>{error.message}</p>}
 
                 {data && <p>Descrição: {data.descricao}</p>}
-                {/* {data && <p>Quantidade: {data.quantidade}</p>}
+                {data && <p>Quantidade em Estoque: {data.quantidade}</p>}
                 {data && <p>Setor: {data.setor}</p>}
-                {data && <p>Valor de Compra: {data.valordecompra}</p>}
-                {data && <p>Valor de Venda: {data.valordevenda}</p>}
-                {data && <p>Vencimento: {data.vencimento}</p>} */}
+                {data && <p>Valor de Venda: {Number(data.valordevenda).toLocaleString('pt-BR', { style: 'currency', currency: "BRL" })}</p>}
+                {data && <p>Vencimento: {new Date(data.vencimento).toLocaleDateString('pt-BR')}</p>}
+
                 <BotaoLoginDiv>
                     <Button onClick={selecionaProduto}>Registrar</Button>
                 </BotaoLoginDiv>
