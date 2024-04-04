@@ -6,7 +6,7 @@ import { LoginDiv, InputText, DivInput, Button, DivLoginInt, TituloLogin, BotaoL
 
 const backend = axios.create({ baseURL: 'https://gerenciador-estoque-backend-gi4a.vercel.app/api/', })
 
-function IndexPage() {
+function RegistrarProduto() {
     const [code, setCode] = useState('');
     const [descricao, setDescricao] = useState('');
     const [valordecompra, setValordecompra] = useState('');
@@ -133,4 +133,4 @@ function IndexPage() {
     );
 }
 
-export default IndexPage;
+export default RegistrarProduto;
