@@ -11,11 +11,11 @@ export const initReader = (onDetected) => {
       readers: ['ean_reader'] // code_128_reader
     },
     locator: {
-      patchSize: "medium", // tamanho do patch de busca
+      patchSize: "small", // tamanho do patch de busca
       halfSample: false // subamostragem da imagem para melhorar a performance
     },
-    numOfWorkers: 2,
-    frequency: 10, // ajustar a frequência de processamento
+    numOfWorkers: 3,
+    frequency: 7, // ajustar a frequência de processamento
     locate: true // habilitar a localização do código de barras
   }, function (err) {
     if (err) {
