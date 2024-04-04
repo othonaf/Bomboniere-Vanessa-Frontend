@@ -8,7 +8,6 @@ const backend = axios.create({ baseURL: 'https://gerenciador-estoque-backend-gi4
 
 function IndexPage() {
     const [code, setCode] = useState('');
-    // const [codprod, setCodProd] = useState('');
     const [descricao, setDescricao] = useState('');
     const [valordecompra, setValordecompra] = useState('');
     const [valordevenda, setValorDeVenda] = useState('');
@@ -51,7 +50,6 @@ function IndexPage() {
                 </Button>
                 {code}
 
-                {/* Renderizar o scanner apenas quando showScanner for true */}
                 {showScanner && <div id="interactive" ref={scannerRef} />}
                 <TituloLogin>Código do Produto</TituloLogin>
                 <DivInput>

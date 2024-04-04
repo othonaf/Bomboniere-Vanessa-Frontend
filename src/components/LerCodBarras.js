@@ -9,8 +9,13 @@ export const initReader = (onDetected) => {
     },
     decoder: {
       readers: ['ean_reader'] // code_128_reader
-    }
-  }, function(err) {
+    },
+    // locator: {
+    //   patchSize: "small", // tamanho do patch de busca
+    //   halfSample: true // subamostragem da imagem para melhorar a performance
+    // },
+    numOfWorkers: 2
+  }, function (err) {
     if (err) {
       console.log(err);
       return;
