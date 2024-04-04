@@ -1,7 +1,8 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import './App.css';
 // import Content from './components/Content';
-import RegistrarProduto from './components/RegistrarProduto';
+// import RegistrarProduto from './components/RegistrarProduto';
+import BuscarProduto from './components/BuscarProduto';
 
 function App() {
   return (
@@ -9,7 +10,7 @@ function App() {
       <div className="App">
         <header className="App-header" />
         <Routes>
-          <Route path="/" element={<RegistrarProduto/>} />
+          <Route path="/" element={<BuscarProduto/>} />
 
         </Routes>
       </div>
