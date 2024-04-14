@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import './App.css';
+import {Pai} from "./components/styled";
+import Header from './components/Header';
 // import Content from './components/Content';
 // import RegistrarProduto from './components/RegistrarProduto';
 import BuscarProduto from './components/BuscarProduto';
@@ -7,13 +8,13 @@ import BuscarProduto from './components/BuscarProduto';
 function App() {
   return (
     <Router>
-      <div className="App">
-        <header className="App-header" />
+      <Pai>
+        <Header />
         <Routes>
           <Route path="/" element={<BuscarProduto/>} />
 
         </Routes>
-      </div>
+      </Pai>
     </Router>
 
   );

@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { initReader, stopReader } from './LerCodBarras';
 import axios from 'axios';
-import { LoginDiv, InputText, DivInput, Button, DivLoginInt, TituloLogin, BotaoLoginDiv } from './styled'
+import { CadProd, InputText, DivInput, Button, DivLoginInt, TituloLogin, BotaoLoginDiv, InfoProduto, DivScanner } from './styled'
 
 
 const backend = axios.create({ baseURL: 'https://gerenciador-estoque-backend-gi4a.vercel.app/api/', })
@@ -38,15 +38,15 @@ function BuscarProduto() {
         initReader(handleDetected);
     };
     return (
-        <LoginDiv>
+        <CadProd>
             <DivLoginInt>
                 <Button onClick={startScanner}>
-                    Iniciar Leitura
+                    Iniciar Leitor
                 </Button>
                 {code}
 
-                {showScanner && <div id="interactive" ref={scannerRef} />}
-                <TituloLogin>Código do Produto</TituloLogin>
+                {showScanner && <DivScanner id="interactive" ref={scannerRef} />}
+                <TituloLogin>Código do Produto:</TituloLogin>
                 <DivInput>
                     <InputText
                         type="text"
@@ -55,21 +55,21 @@ function BuscarProduto() {
                         onChange={(e) => setCode(e.target.value)}
                     />
                 </DivInput>
-                {error && <p>{error.message}</p>}
+                {error && <InfoProduto>{error.message}</InfoProduto>}
 
-                {data && <p>Descrição: {data.descricao}</p>}
-                {data && <p>Quantidade em Estoque: {data.quantidade}</p>}
-                {data && <p>Setor: {data.setor}</p>}
-                {data && <p>Valor de Venda: {Number(data.valordevenda).toLocaleString('pt-BR', { style: 'currency', currency: "BRL" })}</p>}
-                {data && <p>Vencimento: {new Date(data.vencimento).toLocaleDateString('pt-BR')}</p>}
+                {data && <InfoProduto>Descrição: {data.descricao}</InfoProduto>}
+                {data && <InfoProduto>Quantidade em Estoque: {data.quantidade}</InfoProduto>}
+                {data && <InfoProduto>Setor: {data.setor}</InfoProduto>}
+                {data && <InfoProduto>Valor: {Number(data.valordevenda).toLocaleString('pt-BR', { style: 'currency', currency: "BRL" })}</InfoProduto>}
+                {data && <InfoProduto>Vencimento: {new Date(data.vencimento).toLocaleDateString('pt-BR')}</InfoProduto>}
 
                 <BotaoLoginDiv>
-                    <Button onClick={selecionaProduto}>Registrar</Button>
+                    <Button onClick={selecionaProduto}>Buscar</Button>
                 </BotaoLoginDiv>
 
             </DivLoginInt>
 
-        </LoginDiv>
+        </CadProd>
     );
 }
 export default BuscarProduto;
