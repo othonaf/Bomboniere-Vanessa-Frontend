@@ -14,12 +14,18 @@ import {
 
 export const Pai = styled.div`
     text-align: center;
+    align-items: center;
+    width: auto;
+    height: auto;
+    @media (max-width: 767px) {
+        width: 100%;
+    }
 `;
 
 // ------------------------------------- -- ---  DIV HEADER:
 
 export const HeaderDiv = styled.div`
-    background-color: #FCF13D;
+    background-color: #fcd63d;
 `;
 export const NavItem = styled(RSNavItem)`
     font-family: "Lilita One", sans-serif;
@@ -39,36 +45,56 @@ export const LoginDiv = styled.div`
 export const CadProd = styled.div`
     display: flex;
     align-items: center;
+    align-content: center;
     justify-content: center;
-    height: 80vh;
+    height: auto;
     width: 100%;
-    background-color: #603912;
+    background-color: #603814;
+
+    @media (max-width: 767px) {
+        width: 100%;
+    }
 `;
 export const DivScanner = styled.div`
     display: flex;
     flex-direction: row;
     align-content: center;
-    height: 30vh;
+    padding-left: 25%;
+    height: 40vh;
     width: 100%;
+
+    @media (max-width: 767px) {
+        width: 70%;
+    }
     
+`;
+export const DivForm = styled.div`
+    align-items: center;
+    align-content: center;
+    width: 50%;
+    @media (max-width: 767px) {
+        width: auto;
+    }
 `;
 export const InputText = styled(RSInput)`
     resize: vertical;
     min-height: 35px;
-    width: 100%;
+    width: 50%;
     font-size: medium;
+    justify-content: center;
     
 `;
 export const DivInput = styled.div`
     display: flex;
     padding-top: 2%;
     padding-bottom: 2%;
-    align-items: center;
+    /* padding-left: 20%; */
     justify-content: center;
+    width: auto;
     
 `;
 export const Button = styled.button`
-    background-color: #FCF13D;
+    background-color: #fcd63d;
     margin: 5%;
     font-family: "Lilita One", sans-serif;
     font-size: 25px;
@@ -102,15 +128,11 @@ export const BotaoConferir = styled.button`
         background-color: #656161; 
     }
 `;
-export const DivLoginInt = styled.div`
-    width: 30%;
-    @media (max-width: 767px) {
-        width: 70%;
-    }
-`;
+
 export const TituloLogin = styled.h1`
     display: flex;
-    color: black;
+    color: white;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
     justify-content: center;
     font-family: "Lilita One", sans-serif;
     font-weight: 400;
@@ -118,12 +140,12 @@ export const TituloLogin = styled.h1`
     margin-bottom: 0%;
     padding-bottom: 0%;
 `;
-export const BotaoLoginDiv = styled.div`
-    padding-left: 15%;
+export const DivBotaoConsultaProd = styled.div`
+    padding-left: 28%;
     justify-content: center;
-    width: 100%;
+    width: 70%;
     @media (max-width: 767px) {
-        padding-left: 10%;
+        padding-left: 23%;
         margin-right: 270px;
         margin-left: 0%;
     }

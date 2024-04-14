@@ -1,7 +1,8 @@
 import React, { useState, useRef } from 'react';
+import { BiBarcodeReader } from "react-icons/bi";
 import { initReader, stopReader } from './LerCodBarras';
 import axios from 'axios';
-import { CadProd, InputText, DivInput, Button, DivLoginInt, TituloLogin, BotaoLoginDiv, InfoProduto, DivScanner } from './styled'
+import { CadProd, InputText, DivInput, Button, DivForm, TituloLogin, DivBotaoConsultaProd, InfoProduto,  } from './styled'
 
 
 const backend = axios.create({ baseURL: 'https://gerenciador-estoque-backend-gi4a.vercel.app/api/', })
@@ -37,15 +38,16 @@ function BuscarProduto() {
         setShowScanner(true); // Mostrar o scanner quando clicar no botão "Iniciar Leitura"
         initReader(handleDetected);
     };
-    return (
+
+   return (
         <CadProd>
-            <DivLoginInt>
+            <DivForm>
                 <Button onClick={startScanner}>
-                    Iniciar Leitor
+                 Iniciar Leitor <BiBarcodeReader size={40} />
                 </Button>
                 {code}
 
-                {showScanner && <DivScanner id="interactive" ref={scannerRef} />}
+                {showScanner && <div id="interactive" ref={scannerRef} />}
                 <TituloLogin>Código do Produto:</TituloLogin>
                 <DivInput>
                     <InputText
@@ -63,11 +65,11 @@ function BuscarProduto() {
                 {data && <InfoProduto>Valor: {Number(data.valordevenda).toLocaleString('pt-BR', { style: 'currency', currency: "BRL" })}</InfoProduto>}
                 {data && <InfoProduto>Vencimento: {new Date(data.vencimento).toLocaleDateString('pt-BR')}</InfoProduto>}
 
-                <BotaoLoginDiv>
+                <DivBotaoConsultaProd>
                     <Button onClick={selecionaProduto}>Buscar</Button>
-                </BotaoLoginDiv>
+                </DivBotaoConsultaProd>
 
-            </DivLoginInt>
+            </DivForm>
 
         </CadProd>
     );
