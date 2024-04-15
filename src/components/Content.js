@@ -1,67 +1,33 @@
-import React, { useState, useRef } from 'react';
-import Quagga from 'quagga';
+import React from 'react';
+import { UncontrolledCarousel, DivCarousel } from './styled'
+import Baton from '../images/1.png';
+import chocoNestle from '../images/2.png';
+import serenata from '../images/4.png';
 
-function Content() {
-    const [code, setCode] = useState('');
-    const scannerRef = useRef(null);
-
-    const iniciaLeitor = () => {
-        Quagga.init({
-            inputStream: {
-                name: 'Live',
-                type: 'LiveStream',
-                target: scannerRef.current
-            },
-            decoder: {
-                readers: ['ean_reader']
-            }
-        }, function (err) {
-            if (err) {
-                console.log(err);
-                return;
-            }
-            console.log('Initialization finished. Ready to start');
-            Quagga.start();
-            Quagga.onDetected(onDetected);
-        });
-    };
-
-    const stopReader = () => {
-        Quagga.stop();
-    };
-
-    const onDetected = (data) => {
-        setCode(data.codeResult.code);
-        stopReader();
-        console.log(data);
-    };
-
-    const copyCode = () => {
-        navigator.clipboard.writeText(code)
-            .then(() => {
-                alert('Código de barras copiado com sucesso!');
-            })
-            .catch(() => {
-                alert('Erro ao copiar Código de barras!');
-            });
-    };
+function Example() {
+    const items = [
+        {
+            key: 1,
+            src: Baton
+        },
+        {
+            key: 2,
+            src: chocoNestle
+        },
+        {
+            key: 2,
+            src: serenata
+        },
+    ];
 
     return (
-        <div>
-            <button onClick={iniciaLeitor}>
-                Iniciar Leitura
-            </button>
-            {code && (
-                <p>
-                    Código Lido: {code}
-                    <button onClick={copyCode}>
-                        Copiar código
-                    </button>
-                </p>
-            )}
-            <div id="interactive" ref={scannerRef} />
-        </div>
+        <DivCarousel id='produtos'>
+            <UncontrolledCarousel items={items} />
+        </DivCarousel>
+
+
+
     );
 }
 
-export default Content;
+export default Example;

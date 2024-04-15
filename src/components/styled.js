@@ -3,6 +3,7 @@ import {
     // Nav as RSNav, 
     // NavLink as RSNavLink, 
     NavItem as RSNavItem,
+    UncontrolledCarousel as RSUncontrolledCarousel,
     // Card as RSCard, 
     // CardText as RSCardText, 
     // Container as RSContainer, 
@@ -30,6 +31,7 @@ export const HeaderDiv = styled.div`
 export const NavItem = styled(RSNavItem)`
     font-family: "Lilita One", sans-serif;
     font-size: 25px;
+    color: black;
 `;
 
 // ----------------------------------- - --- --  TELA DE LOGIN 
@@ -37,9 +39,61 @@ export const LoginDiv = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 80vh;
+    height: 90vh;
     width: 100%;
     background-color: #603912;
+`;
+export const DivLoginInt = styled.div`
+    width: 40%;
+    @media (max-width: 767px) {
+        width: 70%;
+    }
+`;
+export const BotaoLoginDiv = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    @media (max-width: 767px) {
+        padding-left: 10%;
+        margin-right: 270px;
+        margin-left: 0%;
+    }
+`;
+export const DivInputLogin = styled.div`
+    display: flex;
+    padding-top: 2%;
+    padding-bottom: 2%;
+    justify-content: center;
+    width: auto;
+    
+`;
+export const ButtonLogin = styled.button`
+    background-color: #fcd63d;
+    margin: 5%;
+    font-family: "Lilita One", sans-serif;
+    font-size: 25px;
+    font-weight: bold;
+    color: black;
+    border-radius: 15px;
+    align-items: center;
+    width: 270px;
+    height: 70px;
+    cursor: pointer;
+    margin-top: 5px;
+    &:hover {
+        background-color: #656161; 
+    }
+`;
+
+export const LinkLogin = styled.a`
+    text-decoration: none;
+    color: white;
+    font-family: "Lilita One", sans-serif;
+    text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
+    font-size: 25px;
+
 `;
 // ----------------------------------- - --- --  TELA DE CADASTRAR PRODUTO 
 export const CadProd = styled.div`
@@ -82,6 +136,12 @@ export const InputText = styled(RSInput)`
     width: 50%;
     font-size: medium;
     justify-content: center;
+    align-items: center;
+
+    @media (max-width: 767px) {
+        margin-left: 10%;
+        width: auto;
+    }
     
 `;
 export const DivInput = styled.div`
@@ -140,6 +200,39 @@ export const TituloLogin = styled.h1`
     margin-bottom: 0%;
     padding-bottom: 0%;
 `;
+
+// ----------------------------------- - --- --  TELA DE CRIAR UM LOGIN
+
+export const CriarLoginDiv = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 90vh;
+    width: 100%;
+    background-color: #603912;
+`;
+export const ErrorMessage = styled.p`
+    font-family: "Lilita One", sans-serif;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    color: red;
+    font-weight: 400;
+    font-style: normal;
+    font-size: larger;
+    color: #FFFFFF;
+`;
+
+// ----------------------------------- - --- --  TELA DE CONSULTAR PRODUTO 
+
+export const InfoProduto = styled.p`
+    font-family: "Lilita One", sans-serif;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    color: white;
+    font-weight: 400;
+    font-style: normal;
+    font-size: large;
+    color: #FFFFFF;
+`;
+
 export const DivBotaoConsultaProd = styled.div`
     padding-left: 28%;
     justify-content: center;
@@ -151,12 +244,60 @@ export const DivBotaoConsultaProd = styled.div`
     }
 `;
 
-// ----------------------------------- - --- --  TELA DE CONSULTAR PRODUTO 
+// ----------------------------------- - --- --  DIV DO FOOTER 
 
-export const InfoProduto = styled.p`
-    font-family: "Lilita One", sans-serif;
-    font-weight: 400;
-    font-style: normal;
-    font-size: large;
-    color: #FFFFFF;
+export const DivFooter = styled.div`
+  background-color: #603814;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  font-family: "Lilita One", sans-serif;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+  font-size: larger;
+  height: 50vh;
+  padding-top: 10%;
+  color: white;
+
+  @media (max-width: 767px) {
+    grid-template-columns: 1fr;
+  }
+`;
+
+export const DivLocal = styled.div`
+    display: flex;
+    flex-direction: row;
+    padding-left: 2%;
+    @media (max-width: 767px) {
+        flex-direction: column;
+        justify-content: end;
+  }
+`;
+export const DivContato = styled.div`
+    display: flex;
+    flex-direction: column;
+    padding-left: 2%;
+`;
+export const ContatoWhats = styled.a`
+  text-decoration: none;
+  color: white;
+`;
+export const DivCnpj = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+`;
+
+// ----------------------------------- - --- --  TELA INCIAL "CONTENT" 
+
+export const UncontrolledCarousel = styled(RSUncontrolledCarousel)`
+    display: flex;
+    height: 50%;
+    width: 95%;
+    
+`;
+export const DivCarousel = styled.div`
+    background-color: grey; //603814
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50%;
 `;

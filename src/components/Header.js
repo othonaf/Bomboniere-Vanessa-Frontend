@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {HeaderDiv, NavItem} from "./styled";
+import { useLocation } from 'react-router-dom';
 import {
     Collapse,
     Navbar,
@@ -13,8 +14,20 @@ import logo from "../images/logo.png";
 
 function Header(props) {
     const [collapsed, setCollapsed] = useState(true);
+    const location = useLocation();
 
     const toggleNavbar = () => setCollapsed(!collapsed);
+
+    useEffect(() => {
+        if (location.hash) {
+          let elem = document.getElementById(location.hash.slice(1));
+          if (elem) {
+            elem.scrollIntoView({ behavior: "smooth" });
+          }
+        } else {
+          window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+        }
+      }, [location,]);
 
     return (
         <HeaderDiv>
@@ -33,20 +46,20 @@ function Header(props) {
                 <Collapse isOpen={!collapsed} navbar>
                     <Nav navbar>
                         <NavItem>
-                            <NavLink href="/components/">Produtos</NavLink>
+                            <NavLink href="#produtos">Produtos</NavLink>
                         </NavItem>
                         <NavItem>
-                            <NavLink href="https://github.com/reactstrap/reactstrap">
+                            <NavLink href="#contato">
                                 Contato
                             </NavLink>
                         </NavItem>
                         <NavItem>
-                            <NavLink href="https://github.com/reactstrap/reactstrap">
+                            <NavLink href="/">
                                 Sobre nós
                             </NavLink>
                         </NavItem>
                         <NavItem>
-                            <NavLink href="https://github.com/reactstrap/reactstrap">
+                            <NavLink href="/Login">
                                 Área de Login (Funcionários)
                             </NavLink>
                         </NavItem>
