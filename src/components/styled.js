@@ -144,13 +144,13 @@ export const LinkLogin = styled.a`
 export const RegistraDiv = styled.div`
     display: flex;
     align-items: center;
+    align-content: center;
     justify-content: center;
-    
-    width: 100%;
-    background-color: #603912;
+    height: auto;
+    width: auto;
+    background-color: #603814;
     @media (max-width: 767px) {
-        width: 100%;
-        height: 100vh;
+        width: auto;
     }
 `;
 
@@ -167,18 +167,52 @@ export const CadProd = styled.div`
         width: 100%;
     }
 `;
+export const DivRegisProd = styled.div`
+    align-items: center;
+    align-content: center;
+    width: 50%;
+    @media (max-width: 767px) {
+        width: auto;
+    }
+`;
 export const DivScanner = styled.div`
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-content: center;
-    padding-left: 25%;
-    height: 40vh;
-    width: 100%;
+    justify-content: center;
+    padding-top: 0%;
+    width: auto;
 
     @media (max-width: 767px) {
-        width: 70%;
+        width: auto;
+        padding-left: 30%;
     }
     
+`;
+export const InteractiveDiv = styled.div`
+    padding-left: 15%;
+    width: auto;
+    height: 50%;
+`;
+
+export const ButtonCad = styled.button`
+    background-color: #fcd63d;
+    justify-content: center;
+    margin: 5%;
+    font-family: "Lilita One", sans-serif;
+    font-size: 25px;
+    font-weight: bold;
+    color: black;
+    border-radius: 15px;
+    align-items: center;
+    width: 270px;
+    height: 70px;
+    cursor: pointer;
+    margin-top: 5px;
+    &:hover {
+        background-color: #656161; 
+    }
+        
 `;
 export const DivForm = styled.div`
     align-items: center;
@@ -288,7 +322,7 @@ export const InfoProduto = styled.p`
     color: white;
     font-weight: 400;
     font-style: normal;
-    font-size: large;
+    font-size: 25px;
     color: #FFFFFF;
 `;
 export const DivInputConsulta = styled.div`

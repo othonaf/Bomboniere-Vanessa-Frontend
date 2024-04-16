@@ -2,7 +2,8 @@ import React, { useState, useRef } from 'react';
 import { initReader, stopReader } from './LerCodBarras';
 import axios from 'axios';
 import { BiBarcodeReader } from "react-icons/bi";
-import { RegistraDiv, InputText, DivInput, Button, DivLoginInt, TituloLogin, BotaoLoginDiv } from './styled'
+import { RegistraDiv, InputText, DivInput, Button, DivRegisProd, TituloLogin, BotaoLoginDiv, ButtonCad, InteractiveDiv, InfoProduto } from './styled';
+import { GiConfirmed } from "react-icons/gi";
 
 
 const backend = axios.create({ baseURL: 'https://gerenciador-estoque-backend-gi4a.vercel.app/api/', })
@@ -45,18 +46,20 @@ function RegistrarProduto() {
 
     return (
         <RegistraDiv id='registraProduto'>
-            <DivLoginInt>
-                <Button onClick={startScanner}>
-                <BiBarcodeReader size={40} /> Iniciar Leitura
-                </Button>
+            <DivRegisProd>
+                <ButtonCad onClick={startScanner}>
+                    <BiBarcodeReader size={40} /> Iniciar Leitura
+                </ButtonCad>
                 {code}
 
-                {showScanner && <div id="interactive" ref={scannerRef} />}
+                {showScanner && <InteractiveDiv id="interactive" ref={scannerRef} />}
+
+
                 <TituloLogin>Código do Produto</TituloLogin>
                 <DivInput>
                     <InputText
                         type="text"
-                        placeholder="Nome de usuário"
+                        placeholder="Código do Produto"
                         value={codprod}
                         onChange={(e) => setCode(e.target.value)}
                     />
@@ -96,7 +99,7 @@ function RegistrarProduto() {
                 <DivInput>
                     <InputText
                         type="text"
-                        placeholder="Valor de Venda"
+                        placeholder="Quantidade"
                         value={quantidade}
                         onChange={(e) => setQuantidade(e.target.value)}
                     />
@@ -116,19 +119,19 @@ function RegistrarProduto() {
                 <DivInput>
                     <InputText
                         type="text"
-                        placeholder="Vencimento"
+                        placeholder="Setor"
                         value={setor}
                         onChange={(e) => setSetor(e.target.value)}
                     />
                 </DivInput>
 
-                {error && <p>{error}</p>}
-                {data && <p>{data}</p>}
+                {error && <InfoProduto>{error}</InfoProduto>}
+                {data && <InfoProduto><GiConfirmed /> {data}</InfoProduto>}
                 <BotaoLoginDiv>
                     <Button onClick={registraProduto}>Registrar</Button>
                 </BotaoLoginDiv>
 
-            </DivLoginInt>
+            </DivRegisProd>
 
         </RegistraDiv>
     );
