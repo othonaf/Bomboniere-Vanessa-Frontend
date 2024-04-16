@@ -2,7 +2,7 @@ import React, { useState, useRef } from 'react';
 import { BiBarcodeReader } from "react-icons/bi";
 import { initReader, stopReader } from './LerCodBarras';
 import axios from 'axios';
-import { CadProd, InputText, DivInput, Button, DivForm, TituloLogin, DivBotaoConsultaProd, InfoProduto,  } from './styled'
+import { CadProd, InputText, DivInputConsulta, Button, DivForm, TituloLogin, DivBotaoConsultaProd, InfoProduto,  } from './styled'
 
 
 const backend = axios.create({ baseURL: 'https://gerenciador-estoque-backend-gi4a.vercel.app/api/', })
@@ -49,14 +49,14 @@ function BuscarProduto() {
 
                 {showScanner && <div id="interactive" ref={scannerRef} />}
                 <TituloLogin>Código do Produto:</TituloLogin>
-                <DivInput>
+                <DivInputConsulta>
                     <InputText
                         type="text"
                         placeholder="Código do Produto"
                         value={codprod}
                         onChange={(e) => setCode(e.target.value)}
                     />
-                </DivInput>
+                </DivInputConsulta>
                 {error && <InfoProduto>{error.message}</InfoProduto>}
 
                 {data && <InfoProduto>Descrição: {data.descricao}</InfoProduto>}

@@ -2,20 +2,22 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { LoginDiv, InputText, DivInputLogin, ButtonLogin, DivLoginInt, TituloLogin, BotaoLoginDiv, InfoProduto, ErrorMessage} from './styled';
 import { TiWarning } from "react-icons/ti";
+import { GiConfirmed } from "react-icons/gi";
 
 const api = axios.create({
     baseURL: 'https://gerenciador-estoque-backend-gi4a.vercel.app',
 });
 
 const CriarLogin = () => {
-    const [cpf, setUsername] = useState('');
-    const [senha, setPassword] = useState('');
+    const [cpf, setCPF] = useState('');
+    const [senha, setSenha] = useState('');
     const [senhaConfirmacao, setSenhaConfirmacao] = useState('');
     const [nome, setNome] = useState('');
     const [email, setEmail] = useState('');
     const [telefone, setTelefone] = useState('');
     const [error, setError] = useState(null);
     const [message, setMessage] = useState(null);
+    const perfil = "normal";
 
 
     const handleLogin = async () => {
@@ -24,7 +26,7 @@ const CriarLogin = () => {
             return;
         }
         try {
-            const response = await api.post('/api/criarUsuario', { cpf, senha });
+            const response = await api.post('/api/criarUsuario', { cpf, nome, senha, perfil, email, telefone });
             setMessage(response.data)
         } catch (error) {
             console.error('Erro no login:', error);
@@ -41,7 +43,7 @@ const CriarLogin = () => {
                         type="text"
                         placeholder="CPF"
                         value={cpf}
-                        onChange={(e) => setUsername(e.target.value)}
+                        onChange={(e) => setCPF(e.target.value)}
                     />
                 </DivInputLogin>
                 <DivInputLogin>
@@ -57,7 +59,7 @@ const CriarLogin = () => {
                         type="password"
                         placeholder="Senha"
                         value={senha}
-                        onChange={(e) => setPassword(e.target.value)}
+                        onChange={(e) => setSenha(e.target.value)}
                     />
                 </DivInputLogin>
                 <DivInputLogin>
@@ -85,7 +87,7 @@ const CriarLogin = () => {
                     />
                 </DivInputLogin>
                 <BotaoLoginDiv>
-                    {message && <InfoProduto>{message}</InfoProduto>}
+                    {message && <InfoProduto>{message} <GiConfirmed/></InfoProduto>}
                     {error && <ErrorMessage className="error"><TiWarning/>{error}</ErrorMessage>}
                     <ButtonLogin onClick={handleLogin}>Criar</ButtonLogin>
                 </BotaoLoginDiv>

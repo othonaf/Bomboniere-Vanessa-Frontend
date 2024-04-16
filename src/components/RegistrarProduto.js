@@ -1,7 +1,8 @@
 import React, { useState, useRef } from 'react';
 import { initReader, stopReader } from './LerCodBarras';
 import axios from 'axios';
-import { LoginDiv, InputText, DivInput, Button, DivLoginInt, TituloLogin, BotaoLoginDiv } from './styled'
+import { BiBarcodeReader } from "react-icons/bi";
+import { RegistraDiv, InputText, DivInput, Button, DivLoginInt, TituloLogin, BotaoLoginDiv } from './styled'
 
 
 const backend = axios.create({ baseURL: 'https://gerenciador-estoque-backend-gi4a.vercel.app/api/', })
@@ -43,10 +44,10 @@ function RegistrarProduto() {
     };
 
     return (
-        <LoginDiv>
+        <RegistraDiv id='registraProduto'>
             <DivLoginInt>
                 <Button onClick={startScanner}>
-                    Iniciar Leitura
+                <BiBarcodeReader size={40} /> Iniciar Leitura
                 </Button>
                 {code}
 
@@ -129,7 +130,7 @@ function RegistrarProduto() {
 
             </DivLoginInt>
 
-        </LoginDiv>
+        </RegistraDiv>
     );
 }
 

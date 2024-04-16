@@ -33,6 +33,51 @@ export const NavItem = styled(RSNavItem)`
     font-size: 25px;
     color: black;
 `;
+// ----------------------------------- - --- --  TELA DE NAVEGAÇÃO (PÓS-LOGIN)
+
+export const TelaNavegacao = styled.div`
+    background-color: grey; //603814
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 50%;
+    @media (max-width: 767px) {
+        
+    }
+`;
+export const BotaoNavegacaonDiv = styled.div`
+    padding-top: 2%;
+    padding-bottom: 2px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    @media (max-width: 767px) {
+        padding-left: 10%;
+        margin-right: 20px;
+        margin-left: 0%;
+    }
+`;
+export const ButtonNav = styled.button`
+    background-color: #fcd63d;
+    margin: 2%;
+    font-family: "Lilita One", sans-serif;
+    font-size: 25px;
+    font-weight: bold;
+    color: black;
+    border-radius: 15px;
+    align-items: center;
+    width: 270px;
+    height: 70px;
+    cursor: pointer;
+    margin-top: 5px;
+    &:hover {
+        background-color: #656161; 
+    }
+`;
+
 
 // ----------------------------------- - --- --  TELA DE LOGIN 
 export const LoginDiv = styled.div`
@@ -96,6 +141,19 @@ export const LinkLogin = styled.a`
 
 `;
 // ----------------------------------- - --- --  TELA DE CADASTRAR PRODUTO 
+export const RegistraDiv = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    width: 100%;
+    background-color: #603912;
+    @media (max-width: 767px) {
+        width: 100%;
+        height: 100vh;
+    }
+`;
+
 export const CadProd = styled.div`
     display: flex;
     align-items: center;
@@ -150,6 +208,7 @@ export const DivInput = styled.div`
     padding-bottom: 2%;
     /* padding-left: 20%; */
     justify-content: center;
+    align-items: center;
     width: auto;
     
 `;
@@ -231,6 +290,18 @@ export const InfoProduto = styled.p`
     font-style: normal;
     font-size: large;
     color: #FFFFFF;
+`;
+export const DivInputConsulta = styled.div`
+    display: flex;
+    padding-top: 2%;
+    padding-bottom: 2%;
+    justify-content: center;
+    align-items: center;
+    width: auto;
+    @media (max-width: 767px) {
+        padding-right: 8%;   
+    }
+    
 `;
 
 export const DivBotaoConsultaProd = styled.div`

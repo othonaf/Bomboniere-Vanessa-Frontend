@@ -18,7 +18,7 @@ const Login = () => {
             const response = await api.post('/api/login', { cpf, senha });
             const { token } = response.data;
             localStorage.setItem('token', token);
-            navigate('/Orcamento'); // *******************   CORRIGIR ESTA LINHA AQUI
+            navigate('/PaginaDeNavegacao'); 
         } catch (error) {
             console.error('Erro no login:', error);
             setError('Usuário ou senha inválidos');
