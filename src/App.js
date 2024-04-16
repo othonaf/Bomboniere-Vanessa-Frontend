@@ -8,6 +8,8 @@ import Footer from './components/Footer';
 import CriarLogin from './components/CriarLogin';
 import PaginaDeNavegacao from './components/PaginaDeNavegacao';
 import RegistrarProduto from './components/RegistrarProduto';
+import EnviarEmailRecupSenha from './components/EnviarEmailRecupSenha';
+import TelaDeResetSenha from './components/TelaDeResetSenha';
 
 function App() {
   return (
@@ -21,6 +23,8 @@ function App() {
           <Route path="/criarLogin" element={<CriarLogin />} />
           <Route path="/PaginaDeNavegacao" element={<PaginaDeNavegacao />} />
           <Route path="/RegistrarProduto" element={<RegistrarProduto />} />
+          <Route path="/EnviarEmailRecupSenha" element={<EnviarEmailRecupSenha />} />
+          <Route path="/TelaDeResetSenha" element={<TelaDeResetSenha />} />
         </Routes>
         <Footer />
       </Pai>

@@ -140,6 +140,42 @@ export const LinkLogin = styled.a`
     font-size: 25px;
 
 `;
+// ----------------------------------- - --- --  TELA DE ENVIAR EMAIL PARA RESET DE SENHA: 
+
+export const EnviarEmail = styled.div`
+    display: flex;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    height: auto;
+    width: auto;
+    background-color: #603814;
+    @media (max-width: 767px) {
+        width: auto;
+    }
+`;
+export const TituloReset = styled.h1`
+    
+    color: white;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    justify-content: center;
+    font-family: "Lilita One", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    margin-bottom: 0%;
+    padding-bottom: 0%;
+`;
+
+export const DivFormEmail = styled.div`
+    padding-top: 10%;
+    align-items: center;
+    align-content: center;
+    width: 100%;
+    @media (max-width: 767px) {
+        width: 100%;
+    }
+`;
+
 // ----------------------------------- - --- --  TELA DE CADASTRAR PRODUTO 
 export const RegistraDiv = styled.div`
     display: flex;

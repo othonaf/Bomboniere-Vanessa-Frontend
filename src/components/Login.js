@@ -48,7 +48,7 @@ const Login = () => {
                 {error && <p>{error}</p>}
                 <BotaoLoginDiv>
                     <ButtonLogin onClick={handleLogin}>Entrar</ButtonLogin>
-                    <LinkLogin href='/'>Esqueci a Senha</LinkLogin>
+                    <LinkLogin href='/EnviarEmailRecupSenha'>Esqueci a Senha</LinkLogin>
                     <LinkLogin href='/criarLogin'>Criar Login</LinkLogin>
                 </BotaoLoginDiv>
 

@@ -4,6 +4,9 @@ import axios from 'axios';
 import { BiBarcodeReader } from "react-icons/bi";
 import { RegistraDiv, InputText, DivInput, Button, DivRegisProd, TituloLogin, BotaoLoginDiv, ButtonCad, InteractiveDiv, InfoProduto } from './styled';
 import { GiConfirmed } from "react-icons/gi";
+import moment from 'moment';
+import { TiWarning } from "react-icons/ti";
+
 
 
 const backend = axios.create({ baseURL: 'https://gerenciador-estoque-backend-gi4a.vercel.app/api/', })
@@ -35,13 +38,25 @@ function RegistrarProduto() {
                 { codprod, descricao, valordecompra, valordevenda, vencimento, quantidade, setor });
             setData(response.data)
         } catch (error) {
-            setError(error)
+            setError(error.response.data)
         }
     }
 
     const startScanner = () => {
         setShowScanner(true); // Mostrar o scanner quando clicar no botão "Iniciar Leitura"
         initReader(handleDetected);
+    };
+    const handleDateChange = (e) => {
+        const date = e.target.value; // a data no formato DD/MM/AAAA
+        if (date.length === 10 && moment(date, "DD/MM/YYYY").isValid()) {
+            const formattedDate = moment(date, "DD/MM/YYYY").format("YYYY-MM-DD"); // convertendo para o formato AAAA-MM-DD
+            setVencimento(formattedDate);
+        } else {
+            setVencimento(date);
+        }
+    };
+    const refreshPage = () => {
+        window.location.reload();
     };
 
     return (
@@ -50,7 +65,6 @@ function RegistrarProduto() {
                 <ButtonCad onClick={startScanner}>
                     <BiBarcodeReader size={40} /> Iniciar Leitura
                 </ButtonCad>
-                {code}
 
                 {showScanner && <InteractiveDiv id="interactive" ref={scannerRef} />}
 
@@ -60,7 +74,7 @@ function RegistrarProduto() {
                     <InputText
                         type="text"
                         placeholder="Código do Produto"
-                        value={codprod}
+                        value={code}
                         onChange={(e) => setCode(e.target.value)}
                     />
                 </DivInput>
@@ -111,7 +125,7 @@ function RegistrarProduto() {
                         type="text"
                         placeholder="Vencimento"
                         value={vencimento}
-                        onChange={(e) => setVencimento(e.target.value)}
+                        onChange={handleDateChange}
                     />
                 </DivInput>
 
@@ -125,10 +139,11 @@ function RegistrarProduto() {
                     />
                 </DivInput>
 
-                {error && <InfoProduto>{error}</InfoProduto>}
+                {error && <InfoProduto><TiWarning />{error}</InfoProduto>}
                 {data && <InfoProduto><GiConfirmed /> {data}</InfoProduto>}
                 <BotaoLoginDiv>
                     <Button onClick={registraProduto}>Registrar</Button>
+                    <Button onClick={refreshPage}>Novo Produto</Button>
                 </BotaoLoginDiv>
 
             </DivRegisProd>

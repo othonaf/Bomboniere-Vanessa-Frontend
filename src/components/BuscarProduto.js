@@ -45,7 +45,6 @@ function BuscarProduto() {
                 <Button onClick={startScanner}>
                  Iniciar Leitor <BiBarcodeReader size={40} />
                 </Button>
-                {code}
 
                 {showScanner && <div id="interactive" ref={scannerRef} />}
                 <TituloLogin>Código do Produto:</TituloLogin>
