@@ -33,6 +33,13 @@ export const NavItem = styled(RSNavItem)`
     font-size: 25px;
     color: black;
 `;
+// ------------------------------------- -- ---  DIV CARREGANDO:
+export const DivCarregando = styled.div`
+    display: flex;
+    flex-direction: column;
+    background-color: #fcd63d;
+`;
+
 // ----------------------------------- - --- --  TELA DE NAVEGAÇÃO (PÓS-LOGIN)
 
 export const TelaNavegacao = styled.div`

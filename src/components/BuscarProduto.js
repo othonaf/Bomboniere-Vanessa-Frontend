@@ -2,7 +2,8 @@ import React, { useState, useRef } from 'react';
 import { BiBarcodeReader } from "react-icons/bi";
 import { initReader, stopReader } from './LerCodBarras';
 import axios from 'axios';
-import { CadProd, InputText, DivInputConsulta, Button, DivForm, TituloLogin, DivBotaoConsultaProd, InfoProduto,  } from './styled'
+import { CadProd, InputText, DivInputConsulta, Button, DivForm, TituloLogin, DivBotaoConsultaProd, InfoProduto, } from './styled';
+import Carregando from './Carregando';
 
 
 const backend = axios.create({ baseURL: 'https://gerenciador-estoque-backend-gi4a.vercel.app/api/', })
@@ -12,6 +13,7 @@ function BuscarProduto() {
     const [error, setError] = useState(null);
     const [code, setCode] = useState('');
     const [data, setData] = useState('');
+    const [loading, setLoading] = useState(false);
     const scannerRef = useRef(null);
 
 
@@ -24,6 +26,7 @@ function BuscarProduto() {
 
     const codprod = code;
     const selecionaProduto = async () => {
+        setLoading(true);
         try {
             console.log(code)
             const response = await backend.get('consultaProduto', { params: { codprod } })
@@ -32,18 +35,22 @@ function BuscarProduto() {
         } catch (error) {
             setError(error)
         }
+        setLoading(false);
     }
 
     const startScanner = () => {
         setShowScanner(true); // Mostrar o scanner quando clicar no botão "Iniciar Leitura"
         initReader(handleDetected);
     };
+    if (loading) {
+        return <Carregando />;
+    }
 
-   return (
+    return (
         <CadProd>
             <DivForm>
                 <Button onClick={startScanner}>
-                 Iniciar Leitor <BiBarcodeReader size={40} />
+                    Iniciar Leitor <BiBarcodeReader size={40} />
                 </Button>
 
                 {showScanner && <div id="interactive" ref={scannerRef} />}

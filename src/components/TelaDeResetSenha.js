@@ -3,6 +3,7 @@ import axios from 'axios';
 import { EnviarEmail, InputText, DivInput, Button, DivFormEmail, TituloReset, BotaoLoginDiv, InfoProduto } from './styled';
 import { GiConfirmed } from "react-icons/gi";
 import { TiWarning } from "react-icons/ti";
+import Carregando from './Carregando';
 
 const backend = axios.create({ baseURL: 'https://gerenciador-estoque-backend-gi4a.vercel.app', })
 
@@ -11,12 +12,14 @@ function TelaDeResetSenha() {
     const [data, setData] = useState('');
     const [error, setError] = useState(null);
     const [senhaConfirmacao, setSenhaConfirmacao] = useState('');
+    const [loading, setLoading] = useState(false); 
 
     const recuperaSenha = async () => {
         if (senha !== senhaConfirmacao) {
             setError('As senhas não coincidem');
             return;
         }
+        setLoading(true);
         try {
             const token = localStorage.getItem('token');
             const response = await backend.put('/api/resetaSenha',
@@ -27,8 +30,12 @@ function TelaDeResetSenha() {
         } catch (error) {
             setError(error.response.data)
         }
+        setLoading(false);
     }
 
+    if (loading) {
+        return <Carregando />;
+    }
     return (
         <EnviarEmail>
             <DivFormEmail>

@@ -6,6 +6,7 @@ import { RegistraDiv, InputText, DivInput, Button, DivRegisProd, TituloLogin, Bo
 import { GiConfirmed } from "react-icons/gi";
 import moment from 'moment';
 import { TiWarning } from "react-icons/ti";
+import Carregando from './Carregando';
 
 
 
@@ -22,6 +23,7 @@ function RegistrarProduto() {
     const [data, setData] = useState('');
     const [showScanner, setShowScanner] = useState(true);
     const [error, setError] = useState(null);
+    const [loading, setLoading] = useState(false);
     const scannerRef = useRef(null);
 
     const codprod = code;
@@ -33,6 +35,7 @@ function RegistrarProduto() {
     };
 
     const registraProduto = async () => {
+        setLoading(true);
         try {
             const response = await backend.post('registraProduto',
                 { codprod, descricao, valordecompra, valordevenda, vencimento, quantidade, setor });
@@ -40,6 +43,7 @@ function RegistrarProduto() {
         } catch (error) {
             setError(error.response.data)
         }
+        setLoading(false);
     }
 
     const startScanner = () => {
@@ -58,6 +62,9 @@ function RegistrarProduto() {
     const refreshPage = () => {
         window.location.reload();
     };
+    if (loading) {
+        return <Carregando />;
+    }
 
     return (
         <RegistraDiv id='registraProduto'>

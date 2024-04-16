@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { LoginDiv, InputText, DivInputLogin, ButtonLogin, DivLoginInt, TituloLogin, BotaoLoginDiv, LinkLogin } from './styled'
+import { LoginDiv, InputText, DivInputLogin, ButtonLogin, DivLoginInt, TituloLogin, BotaoLoginDiv, LinkLogin } from './styled';
+import Carregando from './Carregando';
 
 const api = axios.create({
     baseURL: 'https://gerenciador-estoque-backend-gi4a.vercel.app',
@@ -11,9 +12,11 @@ const Login = () => {
     const [cpf, setUsername] = useState('');
     const [senha, setPassword] = useState('');
     const [error, setError] = useState(null);
+    const [loading, setLoading] = useState(false); 
     const navigate = useNavigate();
 
     const handleLogin = async () => {
+        setLoading(true);
         try {
             const response = await api.post('/api/login', { cpf, senha });
             const { token } = response.data;
@@ -23,7 +26,11 @@ const Login = () => {
             console.error('Erro no login:', error);
             setError('Usuário ou senha inválidos');
         }
+        setLoading(false);
     };
+    if (loading) {
+        return <Carregando />;
+    }
 
     return (
         <LoginDiv>

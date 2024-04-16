@@ -3,6 +3,7 @@ import axios from 'axios';
 import { EnviarEmail, InputText, DivInput, Button, DivFormEmail, TituloReset, BotaoLoginDiv, InfoProduto } from './styled';
 import { GiConfirmed } from "react-icons/gi";
 import { TiWarning } from "react-icons/ti";
+import Carregando from './Carregando';
 
 
 
@@ -14,8 +15,10 @@ function EnviarEmailRecupSenha() {
     const [email, setEmail] = useState('');
     const [data, setData] = useState('');
     const [error, setError] = useState(null);
+    const [loading, setLoading] = useState(false);
 
     const recuperaSenha = async () => {
+        setLoading(true);
         try {
             const response = await backend.post('/api/emailResetaSenha',
                 { email });
@@ -23,6 +26,10 @@ function EnviarEmailRecupSenha() {
         } catch (error) {
             setError(error.response.data)
         }
+        setLoading(false);
+    };
+    if (loading) {
+        return <Carregando />;
     }
 
     return (
