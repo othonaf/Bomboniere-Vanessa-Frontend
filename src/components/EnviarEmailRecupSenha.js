@@ -6,8 +6,9 @@ import { TiWarning } from "react-icons/ti";
 
 
 
-const backend = axios.create({ baseURL: 'http://localhost:3003/api/', })
-//https://gerenciador-estoque-backend-gi4a.vercel.app
+const backend = axios.create({ baseURL: 'https://gerenciador-estoque-backend-gi4a.vercel.app', })
+//'https://gerenciador-estoque-backend-gi4a.vercel.app' = PRODUÇÃO
+//'http://localhost:3003' = DESENVOLVIMENTO
 
 function EnviarEmailRecupSenha() {
     const [email, setEmail] = useState('');
@@ -16,7 +17,7 @@ function EnviarEmailRecupSenha() {
 
     const recuperaSenha = async () => {
         try {
-            const response = await backend.post('emailResetaSenha',
+            const response = await backend.post('/api/emailResetaSenha',
                 { email });
             setData(response.data)
         } catch (error) {

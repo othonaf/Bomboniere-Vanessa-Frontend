@@ -4,7 +4,7 @@ import { EnviarEmail, InputText, DivInput, Button, DivFormEmail, TituloReset, Bo
 import { GiConfirmed } from "react-icons/gi";
 import { TiWarning } from "react-icons/ti";
 
-const backend = axios.create({ baseURL: 'http://localhost:3003/api/', })
+const backend = axios.create({ baseURL: 'https://gerenciador-estoque-backend-gi4a.vercel.app', })
 
 function TelaDeResetSenha() {
     const [senha, setSenha] = useState('');
@@ -19,7 +19,7 @@ function TelaDeResetSenha() {
         }
         try {
             const token = localStorage.getItem('token');
-            const response = await backend.put('resetaSenha',
+            const response = await backend.put('/api/resetaSenha',
                 { senha },
                 { headers: { Authorization: `Bearer ${token}` } }
             );
