@@ -13,7 +13,7 @@ function PaginaDeNAvegacao() {
         navigate("/buscarProduto");
     };
     const vendaNavigate = () => {
-        navigate("/");
+        navigate("/RegistraVenda");
     };
     const consultVendaNavigate = () => {
         navigate("/");

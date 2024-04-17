@@ -11,7 +11,7 @@ const Carregando = () => {
     };
 
     return (
-        <DivCarregando style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '50vh' }}>
+        <DivCarregando>
             <TituloReset>Carregando...</TituloReset>
             <ClipLoader 
                 color={"blcak"} loading={true} css={override} size={150}

@@ -7,6 +7,7 @@ import { GiConfirmed } from "react-icons/gi";
 import moment from 'moment';
 import { TiWarning } from "react-icons/ti";
 import Carregando from './Carregando';
+import PaginaResposta from './PaginaResposta';
 
 
 
@@ -24,6 +25,7 @@ function RegistrarProduto() {
     const [showScanner, setShowScanner] = useState(true);
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(false);
+    const [finalizado, setFinalizado] = useState(false);
     const scannerRef = useRef(null);
 
     const codprod = code;
@@ -44,27 +46,42 @@ function RegistrarProduto() {
             setError(error.response.data)
         }
         setLoading(false);
+        setFinalizado(true);
     }
 
     const startScanner = () => {
-        setShowScanner(true); // Mostrar o scanner quando clicar no botão "Iniciar Leitura"
+        setShowScanner(true);
         initReader(handleDetected);
     };
     const handleDateChange = (e) => {
-        const date = e.target.value; // a data no formato DD/MM/AAAA
+        const date = e.target.value;
         if (date.length === 10 && moment(date, "DD/MM/YYYY").isValid()) {
-            const formattedDate = moment(date, "DD/MM/YYYY").format("YYYY-MM-DD"); // convertendo para o formato AAAA-MM-DD
+            const formattedDate = moment(date, "DD/MM/YYYY").format("YYYY-MM-DD");
             setVencimento(formattedDate);
         } else {
             setVencimento(date);
         }
     };
-    const refreshPage = () => {
-        window.location.reload();
-    };
+    
+
     if (loading) {
         return <Carregando />;
-    }
+    };
+
+    if (finalizado) {
+        let mensagem;
+        if (error) {
+            mensagem = <InfoProduto><TiWarning />{error}</InfoProduto>;
+        } else if (data) {
+            mensagem = <InfoProduto><GiConfirmed /> {data}</InfoProduto>;
+        }
+        return (
+            <PaginaResposta
+                message={mensagem}
+                botao={'Novo Produto'} />
+        )
+    };
+
 
     return (
         <RegistraDiv id='registraProduto'>
@@ -146,11 +163,11 @@ function RegistrarProduto() {
                     />
                 </DivInput>
 
-                {error && <InfoProduto><TiWarning />{error}</InfoProduto>}
-                {data && <InfoProduto><GiConfirmed /> {data}</InfoProduto>}
+                {/* {error && <InfoProduto><TiWarning />{error}</InfoProduto>}
+                {data && <InfoProduto><GiConfirmed /> {data}</InfoProduto>} */}
                 <BotaoLoginDiv>
                     <Button onClick={registraProduto}>Registrar</Button>
-                    <Button onClick={refreshPage}>Novo Produto</Button>
+                    
                 </BotaoLoginDiv>
 
             </DivRegisProd>

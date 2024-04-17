@@ -4,8 +4,10 @@ import {
     // NavLink as RSNavLink, 
     NavItem as RSNavItem,
     UncontrolledCarousel as RSUncontrolledCarousel,
-    // Card as RSCard, 
-    // CardText as RSCardText, 
+    Card as RSCard, 
+    CardText as RSCardText, 
+    CardBody as RSCardBody, 
+    CardTitle as RSCardTitle,
     // Container as RSContainer, 
     // InputGroup as RSInputGroup, 
     Input as RSInput
@@ -37,9 +39,42 @@ export const NavItem = styled(RSNavItem)`
 export const DivCarregando = styled.div`
     display: flex;
     flex-direction: column;
-    background-color: #fcd63d;
+    background-color: #fcd63d;;
+    justify-content: center;
+    align-items: center;
+    height: 50vh;
+`;
+// ------------------------------------- -- ---  DIV CARD_PRODUTO:
+export const Card = styled(RSCard)`
+    background-color: grey;
+    border-radius: 15px;
+    margin-bottom: 3%;
+    margin-left: 15%;
+    width: 70%;
+    align-items: center;
+    justify-content: center;
+`;
+export const CardText = styled(RSCardText)`
+    font-family: "Lilita One", sans-serif;
+`;
+export const CardBody = styled(RSCardBody)`
+    
+`;
+export const CardTitle = styled(RSCardTitle)`
+    font-family: "Lilita One", sans-serif;
+    font-size: 25px;
 `;
 
+
+// ------------------------------------- -- ---  PAGINA RESPOSTA:
+export const DivResposta = styled.div`
+    display: flex;
+    flex-direction: column;
+    background-color: #603814;;
+    justify-content: center;
+    align-items: center;
+    height: 50vh;
+`;
 // ----------------------------------- - --- --  TELA DE NAVEGAÇÃO (PÓS-LOGIN)
 
 export const TelaNavegacao = styled.div`
@@ -262,7 +297,7 @@ export const DivForm = styled.div`
     align-content: center;
     width: 50%;
     @media (max-width: 767px) {
-        width: auto;
+        width: 100%;
     }
 `;
 export const InputText = styled(RSInput)`
@@ -386,7 +421,7 @@ export const DivBotaoConsultaProd = styled.div`
     justify-content: center;
     width: 70%;
     @media (max-width: 767px) {
-        padding-left: 23%;
+        padding-left: 13%;
         margin-right: 270px;
         margin-left: 0%;
     }
