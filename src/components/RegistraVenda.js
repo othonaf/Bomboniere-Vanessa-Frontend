@@ -3,8 +3,11 @@ import { BiBarcodeReader } from "react-icons/bi";
 import { initReader, stopReader } from './LerCodBarras';
 import axios from 'axios';
 import { CadProd, InputText, DivInputConsulta, Button, DivForm, TituloLogin, DivBotaoConsultaProd, InfoProduto, } from './styled';
+import { TiWarning } from "react-icons/ti";
 import Carregando from './Carregando';
+import PaginaResposta from './PaginaResposta';
 import CardProduto from './CardProduto';
+import { GiConfirmed } from "react-icons/gi";
 
 
 
@@ -17,22 +20,28 @@ function RegistraVenda() {
     const [produtos, setProdutos] = useState([]);
     const [loading, setLoading] = useState(false);
     const [data, setData] = useState('');
+    const [finalizado, setFinalizado] = useState(false);
     const scannerRef = useRef(null);
 
     const handleDetected = (data) => {
-        setCode(data.codeResult.code);
+        const barcode = data.codeResult.code;
+        setCode(barcode);
         stopReader();
         setShowScanner(false);
+        if (barcode) {
+            selecionaProduto(barcode);
+        }
     };
 
-    const selecionaProduto = async () => {
+    const selecionaProduto = async (barcode) => {
         setLoading(true);
         try {
-            const response = await backend.get('consultaProduto', { params: { codprod: code } });
+            const response = await backend.get('consultaProduto', { params: { codprod: barcode } });
             const produto = response.data[0];
             const novoProduto = {
                 codprod: produto.codprod,
                 descricao: produto.descricao,
+                valordecompra: produto.valordecompra,
                 valordevenda: produto.valordevenda,
                 quantidade: 1 // Inicializa a quantidade como 1 ao adicionar o produto
             };
@@ -42,7 +51,7 @@ function RegistraVenda() {
             setError(error);
         }
         setLoading(false);
-    }
+    };
 
     const calcularValorTotal = () => {
         return produtos.reduce((total, produto) => total + produto.valordevenda * produto.quantidade, 0);
@@ -56,6 +65,7 @@ function RegistraVenda() {
             const listaDeCompras = produtos.map(produto => ({
                 codprod: produto.codprod,
                 quantidade: produto.quantidade,
+                valordecompra: produto.valordecompra,
                 valordevenda: produto.valordevenda
             }));
             const response = await backend.post('registraVenda', { valorTotal, usuario, listaDeCompras });
@@ -66,7 +76,8 @@ function RegistraVenda() {
             setError(error);
         }
         setLoading(false);
-    }
+        setFinalizado(true);
+    };
 
     const startScanner = () => {
         setShowScanner(true);
@@ -75,7 +86,21 @@ function RegistraVenda() {
 
     if (loading) {
         return <Carregando />;
-    }
+    };
+    
+    if (finalizado) {
+        let mensagem;
+        if (error) {
+            mensagem = <InfoProduto><TiWarning />{error}</InfoProduto>;
+        } else if (data) {
+            mensagem = <InfoProduto><GiConfirmed /> {data}</InfoProduto>;
+        }
+        return (
+            <PaginaResposta
+                message={mensagem}
+                botao={'Nova Venda'} />
+        )
+    };
 
     return (
         <CadProd>

@@ -62,7 +62,7 @@ function RegistrarProduto() {
             setVencimento(date);
         }
     };
-    
+
 
     if (loading) {
         return <Carregando />;
@@ -163,11 +163,9 @@ function RegistrarProduto() {
                     />
                 </DivInput>
 
-                {/* {error && <InfoProduto><TiWarning />{error}</InfoProduto>}
-                {data && <InfoProduto><GiConfirmed /> {data}</InfoProduto>} */}
                 <BotaoLoginDiv>
                     <Button onClick={registraProduto}>Registrar</Button>
-                    
+
                 </BotaoLoginDiv>
 
             </DivRegisProd>

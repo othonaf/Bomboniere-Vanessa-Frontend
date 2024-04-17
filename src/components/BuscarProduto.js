@@ -18,17 +18,19 @@ function BuscarProduto() {
 
 
     const handleDetected = (data) => {
-        setCode(data.codeResult.code);
+        const codprod = data.codeResult.code;
+        setCode(codprod);
         stopReader();
         setShowScanner(false);
-        console.log(data);
+        if (codprod) {
+            selecionaProduto(codprod);
+        }
     };
 
-    const codprod = code;
-    const selecionaProduto = async () => {
+    const selecionaProduto = async (codprod) => {
         setLoading(true);
         try {
-            console.log(code)
+            console.log(codprod)
             const response = await backend.get('consultaProduto', { params: { codprod } })
             setData(response.data[0])
             console.log(response)
@@ -44,7 +46,10 @@ function BuscarProduto() {
     };
     if (loading) {
         return <Carregando />;
-    }
+    };
+    const refreshPage = () => {
+        window.location.reload();
+    };
 
     return (
         <CadProd>
@@ -59,7 +64,7 @@ function BuscarProduto() {
                     <InputText
                         type="text"
                         placeholder="Código do Produto"
-                        value={codprod}
+                        value={code}
                         onChange={(e) => setCode(e.target.value)}
                     />
                 </DivInputConsulta>
@@ -73,6 +78,7 @@ function BuscarProduto() {
 
                 <DivBotaoConsultaProd>
                     <Button onClick={selecionaProduto}>Buscar</Button>
+                    <Button onClick={refreshPage}>Nova Pesquisa</Button>
                 </DivBotaoConsultaProd>
 
             </DivForm>
