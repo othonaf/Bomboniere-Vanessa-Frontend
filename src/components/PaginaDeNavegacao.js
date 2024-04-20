@@ -19,7 +19,7 @@ function PaginaDeNAvegacao() {
         navigate("/");
     };
     const dashboardNavigate = () => {
-        navigate("/");
+        navigate("/PaginaDeMetricas");
     };
 
     return (

@@ -9,9 +9,8 @@ import PaginaResposta from './PaginaResposta';
 import CardProduto from './CardProduto';
 import { GiConfirmed } from "react-icons/gi";
 
-
-
-const backend = axios.create({ baseURL: 'https://gerenciador-estoque-backend-gi4a.vercel.app/api/', });
+const backend = axios.create({ baseURL: 'https://gerenciador-estoque-backend-gi4a.vercel.app' , });
+//'http://localhost:3003'
 
 function RegistraVenda() {
     const [showScanner, setShowScanner] = useState(true);
@@ -36,7 +35,7 @@ function RegistraVenda() {
     const selecionaProduto = async (barcode) => {
         setLoading(true);
         try {
-            const response = await backend.get('consultaProduto', { params: { codprod: barcode } });
+            const response = await backend.get('/api/consultaProduto', { params: { codprod: barcode } });
             const produto = response.data[0];
             const novoProduto = {
                 codprod: produto.codprod,
@@ -61,14 +60,16 @@ function RegistraVenda() {
         setLoading(true);
         try {
             const valorTotal = calcularValorTotal();
-            const usuario = '6265217348'; // Substitua pelo nome do usuário real
+            const token = localStorage.getItem('token');
             const listaDeCompras = produtos.map(produto => ({
                 codprod: produto.codprod,
                 quantidade: produto.quantidade,
                 valordecompra: produto.valordecompra,
                 valordevenda: produto.valordevenda
             }));
-            const response = await backend.post('registraVenda', { valorTotal, usuario, listaDeCompras });
+            const response = await backend.post('/api/registraVenda',
+                { valorTotal, listaDeCompras },
+                { headers: { Authorization: `Bearer ${token}` } });
             setProdutos([]);
             setData(response.data)
             console.log(response)
@@ -87,7 +88,7 @@ function RegistraVenda() {
     if (loading) {
         return <Carregando />;
     };
-    
+
     if (finalizado) {
         let mensagem;
         if (error) {

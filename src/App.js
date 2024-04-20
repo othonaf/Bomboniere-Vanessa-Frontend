@@ -11,6 +11,7 @@ import RegistrarProduto from './components/RegistrarProduto';
 import EnviarEmailRecupSenha from './components/EnviarEmailRecupSenha';
 import TelaDeResetSenha from './components/TelaDeResetSenha';
 import RegistraVenda from './components/RegistraVenda';
+import PaginaDeMetricas from './components/PaginaDeMetricas';
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
           <Route path="/EnviarEmailRecupSenha" element={<EnviarEmailRecupSenha />} />
           <Route path="/TelaDeResetSenha" element={<TelaDeResetSenha />} />
           <Route path="/RegistraVenda" element={<RegistraVenda />} />
+          <Route path="/PaginaDeMetricas" element={<PaginaDeMetricas />} />
         </Routes>
         <Footer />
       </Pai>

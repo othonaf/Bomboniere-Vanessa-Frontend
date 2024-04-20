@@ -437,7 +437,7 @@ export const DivFooter = styled.div`
   text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
   font-size: larger;
   height: 50vh;
-  padding-top: 10%;
+  padding-top: 5%;
   color: white;
 
   @media (max-width: 767px) {
@@ -482,5 +482,55 @@ export const DivCarousel = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+    height: 50%;
+`;
+// ----------------------------------- - --- --  PAGINA DE METRICAS
+
+export const DivMetricas = styled.div`
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    justify-content: center;
+    align-items: center;
+`;
+export const DivInputsMetricas = styled.div`
+    display: flex;
+    flex-direction: column;
+    background-color: grey;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+`;
+export const DivData = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+`;
+export const Canva = styled.div`
+    width: 70%;
+`;
+export const InfoLucro = styled.p`
+    font-family: "Lilita One", sans-serif;
+    text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
+    color: brown;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 25px;
+`;
+export const DivRadios = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 70%;
+`;
+
+export const CanvaPieContainer = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 50%;
     height: 50%;
 `;
