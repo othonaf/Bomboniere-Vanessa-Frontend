@@ -9,8 +9,8 @@ import PaginaResposta from './PaginaResposta';
 import CardProduto from './CardProduto';
 import { GiConfirmed } from "react-icons/gi";
 
-const backend = axios.create({ baseURL: 'http://localhost:3003', });
-//  'https://gerenciador-estoque-backend-gi4a.vercel.app'
+const backend = axios.create({ baseURL:  'https://gerenciador-estoque-backend-gi4a.vercel.app' , });
+// 'http://localhost:3003'
 
 function RegistraVenda() {
     const [showScanner, setShowScanner] = useState(true);

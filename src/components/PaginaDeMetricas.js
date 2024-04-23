@@ -8,8 +8,8 @@ import VendasPorFuncionario from './graficos/VendasPorFuncionario';
 import { FormGroup, Label, Input } from 'reactstrap';
 import Carregando from './Carregando';
 
-const backend = axios.create({ baseURL:'http://localhost:3003' , })
-//'https://gerenciador-estoque-backend-gi4a.vercel.app'
+const backend = axios.create({ baseURL:'https://gerenciador-estoque-backend-gi4a.vercel.app' , })
+// 'http://localhost:3003'
 function PaginaDeMetricas() {
     const [startDate, setStartDate] = useState('');
     const [endDate, setEndDate] = useState('');
