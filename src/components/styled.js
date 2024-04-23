@@ -503,22 +503,48 @@ export const DivInputsMetricas = styled.div`
 `;
 export const DivData = styled.div`
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     width: 50%;
 `;
 export const Canva = styled.div`
     width: 70%;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 5%;
 `;
 export const InfoLucro = styled.p`
     font-family: "Lilita One", sans-serif;
     text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
-    color: brown;
+    color: green;
     font-weight: 400;
     font-style: normal;
     font-size: 25px;
+    text-align: left;
 `;
+export const InfoData = styled.p`
+    font-family: "Lilita One", sans-serif;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    color: white;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 25px;
+    color: #FFFFFF;
+    margin-bottom: 0%;
+`;
+export const InputDate = styled.input`
+    border-radius: 5px;
+    height: 35px;
+    width: 150px;
+`;
+// export const DivRendimentos = styled.div`
+//     display: flex;
+//     flex-direction: row;
+//     justify-content: left;
+//     align-items: center;
+//     width: 70%;
+// `;
 export const DivRadios = styled.div`
     display: flex;
     flex-direction: row;
@@ -530,7 +556,7 @@ export const DivRadios = styled.div`
 export const CanvaPieContainer = styled.div`
     display: flex;
     flex-direction: row;
-    justify-content: center;
-    width: 50%;
-    height: 50%;
+    padding-left: 10%;
+    width: 80%;
+    height: 80%;
 `;

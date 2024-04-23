@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { TiWarning } from "react-icons/ti";
-import { DivMetricas, InfoProduto, DivInputsMetricas, Button, DivData, Canva, InfoLucro, DivRadios } from "./styled";
+import { DivMetricas, InfoProduto, DivInputsMetricas, Button, DivData, Canva, InfoLucro, DivRadios, InfoData, InputDate} from "./styled";
 import QuantidadeDeProdutos from './graficos/QuantidadeDeProdutos';
 import RendimentosPorTempo from './graficos/RendimentoPorTempo';
 import VendasPorFuncionario from './graficos/VendasPorFuncionario';
 import { FormGroup, Label, Input } from 'reactstrap';
 import Carregando from './Carregando';
 
-const backend = axios.create({ baseURL: 'https://gerenciador-estoque-backend-gi4a.vercel.app' , })
+const backend = axios.create({ baseURL: 'https://gerenciador-estoque-backend-gi4a.vercel.app', })
 //'http://localhost:3003'
 function PaginaDeMetricas() {
     const [startDate, setStartDate] = useState('');
@@ -16,7 +16,7 @@ function PaginaDeMetricas() {
     const [data, setData] = useState(null); // Adicione um novo estado para armazenar os dados
     const [error, setError] = useState(null);
     const [lucro, setLucro] = useState('');
-    const [endpoint, setEndpoint] = useState('');
+    const [endpoint, setEndpoint] = useState('vendasPorDia');
     const [elemento, setElemento] = useState('');
     const [vendasPorVendedor, setVendaPorVendedor] = useState('');
     const [loading, setLoading] = useState(false);
@@ -26,16 +26,16 @@ function PaginaDeMetricas() {
     const gerarGraficos = async () => {
         setLoading(true);
         switch (endpoint) {
-            case 'vendasPorHora':
+            case 'vendasPorDia':
                 setElemento('hora')
                 break;
-            case 'vendasPorDiasNaSemana':
+            case 'vendasPorSemana':
                 setElemento('dia')
                 break;
-            case 'vendasPorSemana':
+            case 'vendasPorMes':
                 setElemento('semana')
                 break;
-    
+
             default:
                 break;
         }
@@ -50,7 +50,8 @@ function PaginaDeMetricas() {
                 headers: { Authorization: `${token}` }
             });
 
-            console.log(response.data)
+            // console.log(response.data)
+            // console.log(endpoint)
             if (response && response.data) {
                 setData(response.data.vendasPorTempo);
                 setLucro(response.data.totalLucro);
@@ -66,7 +67,7 @@ function PaginaDeMetricas() {
         }
         setLoading(false);
     };
-    
+
     if (loading) {
         return <Carregando />;
     }
@@ -76,28 +77,26 @@ function PaginaDeMetricas() {
                 <InfoProduto>Gráficos de Métricas</InfoProduto>
                 <InfoProduto>Como deseja visualizar os Dados?</InfoProduto>
                 <DivRadios>
-                    <FormGroup check>
-                        <Label check>
-                            <Input type="radio" id="hora" name="endpoint" value="vendasPorHora" checked={endpoint === 'vendasPorHora'} onChange={(e) => setEndpoint(e.target.value)} />
-                            <Label for="hora">Vendas Por Horas do Dia</Label><br />
-                            <Input type="radio" id="dia" name="endpoint" value="vendasPorDiasNaSemana" checked={endpoint === 'vendasPorDiasNaSemana'} onChange={(e) => setEndpoint(e.target.value)} />
-                            <Label for="dia">Vendas Por Dias da Semana </Label><br />
-                            <Input type="radio" id="semana" name="endpoint" value="vendasPorSemana" checked={endpoint === 'vendasPorSemana'} onChange={(e) => setEndpoint(e.target.value)} />
-                            <Label for="semana">Vendas Por Semanas do Mês</Label><br />
-                        </Label>
+                    <FormGroup>
+                        <Label for="select">Selecione uma opção</Label>
+                        <Input type="select" name="endpoint" id="select" value={endpoint} onChange={(e) => setEndpoint(e.target.value)}>
+                            <option value="vendasPorDia">Vendas Por Dia</option>
+                            <option value="vendasPorSemana">Vendas Por Semana</option>
+                            <option value="vendasPorMes">Vendas Por Mês</option>
+                        </Input>
                     </FormGroup>
                 </DivRadios>
                 <DivData>
-                    <InfoProduto>Insira a Data Inicial </InfoProduto>
-                    <input
+                    <InfoData>Insira a Data Inicial:</InfoData>
+                    <InputDate
                         type="date"
                         value={startDate}
                         onChange={(e) => setStartDate(e.target.value)}
                     />
                 </DivData>
                 <DivData>
-                    <InfoProduto>Insira a Data Final </InfoProduto>
-                    <input
+                    <InfoData>Insira a Data Final:</InfoData>
+                    <InputDate
                         type="date"
                         value={endDate}
                         onChange={(e) => setEndDate(e.target.value)}
@@ -106,11 +105,10 @@ function PaginaDeMetricas() {
                 <Button onClick={gerarGraficos}>Gerar Gráficos</Button>
             </DivInputsMetricas>
             {lucro && <InfoLucro>Total de Rendimentos no período: {Number(lucro).toLocaleString('pt-BR', { style: 'currency', currency: "BRL" })}</InfoLucro>}
-
             <Canva>
                 {data && <QuantidadeDeProdutos data={data} elemento={elemento} />}
                 {data && <RendimentosPorTempo data={data} elemento={elemento} />}
-                {vendasPorVendedor && <VendasPorFuncionario vendasPorVendedor={vendasPorVendedor}/>}
+                {vendasPorVendedor && <VendasPorFuncionario vendasPorVendedor={vendasPorVendedor} />}
             </Canva>
 
             {error && <InfoProduto><TiWarning />{error}</InfoProduto>}

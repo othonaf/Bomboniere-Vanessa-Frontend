@@ -6,7 +6,10 @@ function VendasPorFuncionario({ vendasPorVendedor }) {
     const chartRef = useRef(null);
     const chartInstanceRef = useRef(null);
 
+    
     useEffect(() => {
+        const colors = ['green', 'blue', 'red', 'yellow', 'purple', 'orange', 'pink', 'cyan', 'magenta', 'lime'];
+
         if (vendasPorVendedor && chartRef.current) {
             console.log(vendasPorVendedor)
             if (chartInstanceRef.current) {
@@ -14,22 +17,30 @@ function VendasPorFuncionario({ vendasPorVendedor }) {
             }
             const ctx = chartRef.current.getContext('2d');
             chartInstanceRef.current = new Chart(ctx, {
-                type: 'pie', // Altere 'pizza' para 'pie' aqui
+                type: 'pie',
                 data: {
-                    labels: vendasPorVendedor.map(item => item.vendedor), // Aqui devem ser os vendedores
+                    labels: vendasPorVendedor.map(item => item.nome),
                     datasets: [{
                         label: 'Vendas Por Vendedor',
-                        data: vendasPorVendedor.map(item => item.quantidade), // Aqui devem ser as quantidades de vendas
-                        backgroundColor: 'green',
-                        borderColor: 'blue',
+                        data: vendasPorVendedor.map(item => item.quantidade),
+                        backgroundColor: vendasPorVendedor.map((item, index) => colors[index % colors.length]), // Associa cada vendedor a uma cor
+                        borderColor: 'black',
                         borderWidth: 1,
                     }],
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'left', // Posiciona a legenda à esquerda
+                        },
+                    },
                 },
             });
         }
     }, [vendasPorVendedor]);
 
-    return (<CanvaPieContainer>
+    return (<CanvaPieContainer id='DivPieChart'>
         <canvas ref={chartRef}></canvas>
     </CanvaPieContainer>)
 

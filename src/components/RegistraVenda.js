@@ -9,7 +9,7 @@ import PaginaResposta from './PaginaResposta';
 import CardProduto from './CardProduto';
 import { GiConfirmed } from "react-icons/gi";
 
-const backend = axios.create({ baseURL: 'https://gerenciador-estoque-backend-gi4a.vercel.app' , });
+const backend = axios.create({ baseURL: 'https://gerenciador-estoque-backend-gi4a.vercel.app'   , });
 //'http://localhost:3003'
 
 function RegistraVenda() {
@@ -20,6 +20,7 @@ function RegistraVenda() {
     const [loading, setLoading] = useState(false);
     const [data, setData] = useState('');
     const [finalizado, setFinalizado] = useState(false);
+    const [qtde_total_prod, setQtdeTotalProd] = useState(0); 
     const scannerRef = useRef(null);
 
     const handleDetected = (data) => {
@@ -52,9 +53,13 @@ function RegistraVenda() {
         setLoading(false);
     };
 
+    const calcularQtdeProdutos = (quantidade) => {
+        setQtdeTotalProd(Number(qtde_total_prod) + Number(quantidade));
+
+    };
     const calcularValorTotal = () => {
         return produtos.reduce((total, produto) => total + produto.valordevenda * produto.quantidade, 0);
-    }
+    };
 
     const registraVenda = async () => {
         setLoading(true);
@@ -67,8 +72,9 @@ function RegistraVenda() {
                 valordecompra: produto.valordecompra,
                 valordevenda: produto.valordevenda
             }));
+            
             const response = await backend.post('/api/registraVenda',
-                { valorTotal, listaDeCompras },
+                { valorTotal, listaDeCompras, qtde_total_prod },
                 { headers: { Authorization: `Bearer ${token}` } });
             setProdutos([]);
             setData(response.data)
@@ -131,6 +137,7 @@ function RegistraVenda() {
                             const novosProdutos = [...produtos];
                             novosProdutos[index].quantidade = parseInt(novaQuantidade);
                             setProdutos(novosProdutos);
+                            calcularQtdeProdutos(novaQuantidade)
                         }}
                     />
                 ))}
