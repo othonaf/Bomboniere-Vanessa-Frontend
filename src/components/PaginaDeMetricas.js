@@ -8,8 +8,8 @@ import VendasPorFuncionario from './graficos/VendasPorFuncionario';
 import { FormGroup, Label, Input } from 'reactstrap';
 import Carregando from './Carregando';
 
-const backend = axios.create({ baseURL: 'https://gerenciador-estoque-backend-gi4a.vercel.app', })
-//'http://localhost:3003'
+const backend = axios.create({ baseURL:'http://localhost:3003' , })
+//'https://gerenciador-estoque-backend-gi4a.vercel.app'
 function PaginaDeMetricas() {
     const [startDate, setStartDate] = useState('');
     const [endDate, setEndDate] = useState('');
@@ -50,8 +50,8 @@ function PaginaDeMetricas() {
                 headers: { Authorization: `${token}` }
             });
 
-            // console.log(response.data)
-            // console.log(endpoint)
+            console.log(response.data)
+            console.log(endpoint)
             if (response && response.data) {
                 setData(response.data.vendasPorTempo);
                 setLucro(response.data.totalLucro);

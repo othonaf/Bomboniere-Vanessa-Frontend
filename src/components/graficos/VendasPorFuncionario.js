@@ -11,7 +11,6 @@ function VendasPorFuncionario({ vendasPorVendedor }) {
         const colors = ['green', 'blue', 'red', 'yellow', 'purple', 'orange', 'pink', 'cyan', 'magenta', 'lime'];
 
         if (vendasPorVendedor && chartRef.current) {
-            console.log(vendasPorVendedor)
             if (chartInstanceRef.current) {
                 chartInstanceRef.current.destroy();
             }
