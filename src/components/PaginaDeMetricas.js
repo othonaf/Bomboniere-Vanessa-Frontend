@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { TiWarning } from "react-icons/ti";
-import { DivMetricas, InfoProduto, DivInputsMetricas, Button, DivData, Canva, InfoLucro, DivRadios, InfoData, InputDate} from "./styled";
+import { DivMetricas, InfoProduto, DivInputsMetricas, Button, DivData, Canva, InfoLucro, DivRadios, InfoData, InputDate } from "./styled";
 import QuantidadeDeProdutos from './graficos/QuantidadeDeProdutos';
 import RendimentosPorTempo from './graficos/RendimentoPorTempo';
 import VendasPorFuncionario from './graficos/VendasPorFuncionario';
@@ -13,15 +13,14 @@ const backend = axios.create({ baseURL:'https://gerenciador-estoque-backend-gi4a
 function PaginaDeMetricas() {
     const [startDate, setStartDate] = useState('');
     const [endDate, setEndDate] = useState('');
-    const [data, setData] = useState(null); // Adicione um novo estado para armazenar os dados
+    const [data, setData] = useState(null);
+    const [rendimento, setRendimento] = useState(null);    
     const [error, setError] = useState(null);
     const [lucro, setLucro] = useState('');
     const [endpoint, setEndpoint] = useState('vendasPorDia');
     const [elemento, setElemento] = useState('');
     const [vendasPorVendedor, setVendaPorVendedor] = useState('');
     const [loading, setLoading] = useState(false);
-
-
 
     const gerarGraficos = async () => {
         setLoading(true);
@@ -51,9 +50,10 @@ function PaginaDeMetricas() {
             });
 
             console.log(response.data)
-            console.log(endpoint)
+            //console.log(endpoint)
             if (response && response.data) {
                 setData(response.data.vendasPorTempo);
+                setRendimento(response.data.lucroPorVenda);
                 setLucro(response.data.totalLucro);
                 setVendaPorVendedor(response.data.vendasPorVendedor)
                 console.log(response.data.totalLucro)
@@ -107,7 +107,7 @@ function PaginaDeMetricas() {
             {lucro && <InfoLucro>Total de Rendimentos no período: {Number(lucro).toLocaleString('pt-BR', { style: 'currency', currency: "BRL" })}</InfoLucro>}
             <Canva>
                 {data && <QuantidadeDeProdutos data={data} elemento={elemento} />}
-                {data && <RendimentosPorTempo data={data} elemento={elemento} />}
+                {data && <RendimentosPorTempo data={rendimento} elemento={elemento} />}
                 {vendasPorVendedor && <VendasPorFuncionario vendasPorVendedor={vendasPorVendedor} />}
             </Canva>
 

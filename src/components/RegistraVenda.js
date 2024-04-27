@@ -9,8 +9,8 @@ import PaginaResposta from './PaginaResposta';
 import CardProduto from './CardProduto';
 import { GiConfirmed } from "react-icons/gi";
 
-const backend = axios.create({ baseURL:  'https://gerenciador-estoque-backend-gi4a.vercel.app' , });
-// 'http://localhost:3003'
+const backend = axios.create({ baseURL: 'https://gerenciador-estoque-backend-gi4a.vercel.app'  , });
+//'http://localhost:3003' 
 
 function RegistraVenda() {
     const [showScanner, setShowScanner] = useState(true);
@@ -20,7 +20,7 @@ function RegistraVenda() {
     const [loading, setLoading] = useState(false);
     const [data, setData] = useState('');
     const [finalizado, setFinalizado] = useState(false);
-    const [qtde_total_prod, setQtdeTotalProd] = useState(0);
+    const [qtde_total_prod, setQtdeTotalProd] = useState(1);
     const scannerRef = useRef(null);
 
     const handleDetected = (data) => {
@@ -50,6 +50,7 @@ function RegistraVenda() {
                 };
                 setProdutos([...produtos, novoProduto]);
                 setCode('');
+                
             }
         } catch (error) {
             setError(error);
@@ -60,6 +61,7 @@ function RegistraVenda() {
     const calcularQtdeProdutos = () => {
         const totalProdutos = produtos.reduce((total, produto) => total + produto.quantidade, 0);
         setQtdeTotalProd(totalProdutos);
+        console.log("aqui", totalProdutos)
     };
 
     const calcularValorTotal = () => {

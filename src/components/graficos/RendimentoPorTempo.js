@@ -4,8 +4,10 @@ import Chart from 'chart.js/auto';
 function RendimentosPorTempo({ data, elemento }) {
     const chartRef = useRef(null);
     const chartInstanceRef = useRef(null);
+    
 
     useEffect(() => {
+        console.log(data)
         if (data && chartRef.current) {
             if (chartInstanceRef.current) {
                 chartInstanceRef.current.destroy();
@@ -25,7 +27,7 @@ function RendimentosPorTempo({ data, elemento }) {
                 },
             });
         }
-    }, [data, elemento]);
+    }, [elemento, data]);
 
     return <canvas ref={chartRef} width="400" height="200"></canvas>;
 }
