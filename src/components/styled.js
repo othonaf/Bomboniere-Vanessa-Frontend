@@ -4,9 +4,9 @@ import {
     // NavLink as RSNavLink, 
     NavItem as RSNavItem,
     UncontrolledCarousel as RSUncontrolledCarousel,
-    Card as RSCard, 
-    CardText as RSCardText, 
-    CardBody as RSCardBody, 
+    Card as RSCard,
+    CardText as RSCardText,
+    CardBody as RSCardBody,
     CardTitle as RSCardTitle,
     // Container as RSContainer, 
     // InputGroup as RSInputGroup, 
@@ -28,6 +28,8 @@ export const Pai = styled.div`
 // ------------------------------------- -- ---  DIV HEADER:
 
 export const HeaderDiv = styled.div`
+    display: grid;
+    grid-template-columns: 9fr 1fr;
     background-color: #fcd63d;
 `;
 export const NavItem = styled(RSNavItem)`
@@ -35,6 +37,46 @@ export const NavItem = styled(RSNavItem)`
     font-size: 25px;
     color: black;
 `;
+export const LogoutDiv = styled.div`
+    padding-top: 20px;
+    cursor: pointer;
+`;
+export const Logout = styled.p`
+    font-family: "Lilita One", sans-serif;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    color: white;
+    font-weight: 200;
+    font-style: normal;
+    font-size: 20px;
+    color: #FFFFFF;
+`;
+export const DivLogada = styled.div`
+    display: flex;
+    flex-direction: row;
+`;
+export const DivNotifi = styled.div`
+    padding-top: 30px;
+    padding-right: 10px;
+    cursor: pointer;
+`;
+export const NotificationIcon = styled.div`
+    position: relative;
+    display: inline-block;
+    font-size: 30px;
+`;
+
+export const NotificationCount = styled.span`
+    position: absolute;
+    top: -2px;
+    right: -5px;
+    background-color: red;
+    color: white;
+    border-radius: 50%;
+    padding: 0 5px;
+    font-size: 12px;
+    font-weight: bold;
+`;
+
 // ------------------------------------- -- ---  DIV CARREGANDO:
 export const DivCarregando = styled.div`
     display: flex;
@@ -538,13 +580,7 @@ export const InputDate = styled.input`
     height: 35px;
     width: 150px;
 `;
-// export const DivRendimentos = styled.div`
-//     display: flex;
-//     flex-direction: row;
-//     justify-content: left;
-//     align-items: center;
-//     width: 70%;
-// `;
+
 export const DivRadios = styled.div`
     display: flex;
     flex-direction: row;

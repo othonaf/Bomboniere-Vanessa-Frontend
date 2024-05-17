@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import {HeaderDiv, NavItem} from "./styled";
-import { useLocation } from 'react-router-dom';
+import { HeaderDiv, NavItem, Logout, LogoutDiv, DivLogada, DivNotifi, } from "./styled";
+import { useLocation, useNavigate } from 'react-router-dom';
 import {
     Collapse,
     Navbar,
@@ -10,27 +10,50 @@ import {
     NavLink,
 } from 'reactstrap';
 import logo from "../images/logo.png";
+import { SlLogout } from "react-icons/sl";
+import Notification from './CountNofitication';
+//import { IoNotifications } from "react-icons/io5";
 
 
 function Header(props) {
     const [collapsed, setCollapsed] = useState(true);
+    const [logout, setLogout] = useState(false);
     const location = useLocation();
+    const navigate = useNavigate();
 
     const toggleNavbar = () => setCollapsed(!collapsed);
 
     useEffect(() => {
         if (location.hash) {
-          let elem = document.getElementById(location.hash.slice(1));
-          if (elem) {
-            elem.scrollIntoView({ behavior: "smooth" });
-          }
+            let elem = document.getElementById(location.hash.slice(1));
+            if (elem) {
+                elem.scrollIntoView({ behavior: "smooth" });
+            }
         } else {
-          window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+            window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
         }
-      }, [location,]);
+    }, [location,]);
+
+    const handleLogout = () => {
+        localStorage.removeItem('token');
+        navigate('/Login');
+    };
+
+    const token = localStorage.getItem('token');
+    const loginLink = token ? '/PaginaDeNavegacao' : '/Login';
+
+    useEffect(() => {
+        if (token) {
+            setLogout(true);
+        } else {
+            setLogout(false);
+        }
+    }, [token]);
+
+
 
     return (
-        <HeaderDiv>
+        <HeaderDiv id='maior'>
             <Navbar color="faded" light>
                 <NavbarBrand href="/">
                     <img
@@ -59,13 +82,24 @@ function Header(props) {
                             </NavLink>
                         </NavItem>
                         <NavItem>
-                            <NavLink href="/Login">
+                            <NavLink href={loginLink}>
                                 Área de Login (Funcionários)
                             </NavLink>
                         </NavItem>
                     </Nav>
                 </Collapse>
             </Navbar>
+            {logout &&
+                <DivLogada>
+                    <DivNotifi>
+                        <Notification count={1} />
+                    </DivNotifi>
+                    <LogoutDiv id='logout' onClick={handleLogout}>
+                        <SlLogout size="30px" />
+                        <Logout>Logout</Logout>
+                    </LogoutDiv>
+                </DivLogada>
+            }
         </HeaderDiv>
     );
 }

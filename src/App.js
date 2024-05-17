@@ -12,6 +12,7 @@ import EnviarEmailRecupSenha from './components/EnviarEmailRecupSenha';
 import TelaDeResetSenha from './components/TelaDeResetSenha';
 import RegistraVenda from './components/RegistraVenda';
 import PaginaDeMetricas from './components/PaginaDeMetricas';
+import VerificaAutenticacao from './components/VerificaAutenticacao';
 
 function App() {
   return (
@@ -23,12 +24,27 @@ function App() {
           <Route path="/buscarProduto" element={<BuscarProduto />} />
           <Route path="/Login" element={<Login />} />
           <Route path="/criarLogin" element={<CriarLogin />} />
-          <Route path="/PaginaDeNavegacao" element={<PaginaDeNavegacao />} />
-          <Route path="/RegistrarProduto" element={<RegistrarProduto />} />
+          <Route path="/PaginaDeNavegacao" element={
+            <VerificaAutenticacao>
+              <PaginaDeNavegacao />
+            </VerificaAutenticacao>} />
+          <Route path="/RegistrarProduto" element={
+            <VerificaAutenticacao>
+              <RegistrarProduto />
+            </VerificaAutenticacao>} />
           <Route path="/EnviarEmailRecupSenha" element={<EnviarEmailRecupSenha />} />
           <Route path="/TelaDeResetSenha" element={<TelaDeResetSenha />} />
-          <Route path="/RegistraVenda" element={<RegistraVenda />} />
-          <Route path="/PaginaDeMetricas" element={<PaginaDeMetricas />} />
+          <Route path="/RegistraVenda" element={
+            <VerificaAutenticacao>
+              <RegistraVenda />
+            </VerificaAutenticacao>
+          } />
+          <Route path="/PaginaDeMetricas" element={
+            <VerificaAutenticacao>
+              <PaginaDeMetricas />
+            </VerificaAutenticacao>
+          } />
+
         </Routes>
         <Footer />
       </Pai>
