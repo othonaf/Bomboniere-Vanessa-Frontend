@@ -65,6 +65,17 @@ function Header(props) {
                         }}
                     />
                 </NavbarBrand>
+                {logout &&
+                <DivLogada>
+                    <DivNotifi>
+                        <Notification count={1} />
+                    </DivNotifi>
+                    <LogoutDiv id='logout' onClick={handleLogout}>
+                        <SlLogout size="30px" />
+                        <Logout>Logout</Logout>
+                    </LogoutDiv>
+                </DivLogada>
+            }
                 <NavbarToggler onClick={toggleNavbar} className="me-2" />
                 <Collapse isOpen={!collapsed} navbar>
                     <Nav navbar>
@@ -89,17 +100,7 @@ function Header(props) {
                     </Nav>
                 </Collapse>
             </Navbar>
-            {logout &&
-                <DivLogada>
-                    <DivNotifi>
-                        <Notification count={1} />
-                    </DivNotifi>
-                    <LogoutDiv id='logout' onClick={handleLogout}>
-                        <SlLogout size="30px" />
-                        <Logout>Logout</Logout>
-                    </LogoutDiv>
-                </DivLogada>
-            }
+            
         </HeaderDiv>
     );
 }

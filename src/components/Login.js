@@ -5,7 +5,7 @@ import { LoginDiv, InputText, DivInputLogin, ButtonLogin, DivLoginInt, TituloLog
 import Carregando from './Carregando';
 
 const api = axios.create({
-    baseURL: 'http://localhost:3003', //'https://gerenciador-estoque-backend-gi4a.vercel.app',
+    baseURL: 'https://gerenciador-estoque-backend-gi4a.vercel.app', //  'http://localhost:3003'
 });
 
 const Login = () => {

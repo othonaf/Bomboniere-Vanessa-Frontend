@@ -29,7 +29,7 @@ export const Pai = styled.div`
 
 export const HeaderDiv = styled.div`
     display: grid;
-    grid-template-columns: 9fr 1fr;
+    grid-template-columns: 9fr ;
     background-color: #fcd63d;
 `;
 export const NavItem = styled(RSNavItem)`
@@ -53,6 +53,7 @@ export const Logout = styled.p`
 export const DivLogada = styled.div`
     display: flex;
     flex-direction: row;
+    padding-left: 70%;
 `;
 export const DivNotifi = styled.div`
     padding-top: 30px;

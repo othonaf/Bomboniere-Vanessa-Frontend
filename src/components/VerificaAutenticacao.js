@@ -15,7 +15,8 @@ function VerificaAutenticacao({ children }) {
                 navigate('/Login');
             } else {
                 try {
-                    const response = await axios.get('http://localhost:3003/api/testaToken', {
+                    //'http://localhost:3003/api/testaToken' 
+                    const response = await axios.get('https://gerenciador-estoque-backend-gi4a.vercel.app', {
                         headers: {
                             Authorization: `Bearer ${token}`
                         }
